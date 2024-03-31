@@ -1,4 +1,10 @@
-import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  IsOptional,
+  IsString,
+  IsStrongPassword,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -11,4 +17,8 @@ export class CreateUserDto {
     minLength: 6,
   })
   password: string;
+
+  @IsOptional()
+  @IsDateString()
+  birthAt: string;
 }
