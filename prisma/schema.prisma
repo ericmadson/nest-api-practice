@@ -18,6 +18,7 @@ model User {
   name      String
   email     String
   password  String
+  birthAt   DateTime @db.Date
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @default(now()) @db.Timestamp(0)
 

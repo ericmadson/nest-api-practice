@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePutUserDto } from './dto/update-put-user.dto';
-import { UpdatePatchUser } from './dto/update-patch.dto';
+import { UpdatePatchUserDto } from './dto/update-patch.dto';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -34,15 +34,15 @@ export class UserController {
 
   @Put(':id')
   async update(
-    @Body() { name, email, password }: UpdatePutUserDto,
+    @Body() data: UpdatePutUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { name, email, password, id };
+    return this.userService.update(id, data);
   }
 
   @Patch(':id')
   async updatePartial(
-    @Body() { name, email, password }: UpdatePatchUser,
+    @Body() { name, email, password }: UpdatePatchUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
     return { name, email, password, id };
