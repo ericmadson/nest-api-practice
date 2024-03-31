@@ -42,14 +42,14 @@ export class UserController {
 
   @Patch(':id')
   async updatePartial(
-    @Body() { name, email, password }: UpdatePatchUserDto,
+    @Body() data: UpdatePatchUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { name, email, password, id };
+    return this.userService.updatePartial(id, data);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return { id };
+    return this.userService.delete(id);
   }
 }
