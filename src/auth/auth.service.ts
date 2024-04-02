@@ -27,6 +27,31 @@ export class AuthService {
 
     return user;
   }
-  async forget(token: string) {}
-  async reset(token: string) {}
+  async forget(email: string) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Credenciais Inválidas');
+    }
+
+    return true;
+  }
+  async reset(password: string, token: string) {
+    const id = 0;
+
+    await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password,
+      },
+    });
+
+    return true;
+  }
 }
